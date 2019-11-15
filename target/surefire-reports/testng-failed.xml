@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" verbose="5" name="Failed suite [mysuite]">
+  <test name="suibianbu(failed)">
+    <classes>
+      <class name="com.orimeton.TestNg">
+        <methods>
+          <include name="name"/>
+        </methods>
+      </class> <!-- com.orimeton.TestNg -->
+    </classes>
+  </test> <!-- suibianbu(failed) -->
+</suite> <!-- Failed suite [mysuite] -->

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- WARNING: Eclipse auto-generated file.
+              Any modifications will be overwritten.
+              To include a user specific buildfile here, simply create one in the same
+              directory with the processing instruction <?eclipse.ant.import?>
+              as the first entry and export the buildfile again. --><project basedir="." default="build" name="testng">
+    <property environment="env"/>
+    <property name="ECLIPSE_HOME" value="../../../BCYSoftware/eclipse/eclipse/"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.5"/>
+    <property name="source" value="1.5"/>
+    <path id="Maven Dependencies.libraryclasspath">
+        <pathelement location="C:/Users/BCY/.m2/repository/org/testng/testng/6.10/testng-6.10.jar"/>
+        <pathelement location="C:/Users/BCY/.m2/repository/com/beust/jcommander/1.48/jcommander-1.48.jar"/>
+    </path>
+    <path id="TestNG.libraryclasspath">
+        <pathelement location="C:/Users/BCY/.p2/pool/plugins/org.testng_7.0.0.r201908191551.jar"/>
+        <pathelement location="C:/Users/BCY/.p2/pool/plugins/com.beust.jcommander_1.72.0.jar"/>
+        <pathelement location="C:/Users/BCY/.p2/pool/plugins/org.apache-extras.beanshell.bsh_2.0.0.b6.jar"/>
+        <pathelement location="C:/Users/BCY/.p2/pool/plugins/org.yaml.snakeyaml_1.21.0.jar"/>
+    </path>
+    <path id="testng.classpath">
+        <pathelement location="target/classes"/>
+        <pathelement location="target/test-classes"/>
+        <path refid="Maven Dependencies.libraryclasspath"/>
+        <path refid="TestNG.libraryclasspath"/>
+        <pathelement location="src/main/webapp/lib/SaxonLiaison.jar"/>
+        <pathelement location="test-output/lib/saxon-8.7.jar"/>
+        <pathelement location="test-output/lib/SaxonLiaison.jar"/>
+        <pathelement location="src/main/webapp/lib/saxon-8.7.jar"/>
+    </path>
+    <target name="init">
+        <mkdir dir="target/classes"/>
+        <mkdir dir="target/test-classes"/>
+        <copy includeemptydirs="false" todir="target/classes">
+            <fileset dir="src/main/java">
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+        <copy includeemptydirs="false" todir="target/classes">
+            <fileset dir="src/main/resources">
+                <exclude name="**/*.java"/>
+                <exclude name="**"/>
+            </fileset>
+        </copy>
+        <copy includeemptydirs="false" todir="target/test-classes">
+            <fileset dir="src/test/java">
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="clean">
+        <delete dir="target/classes"/>
+        <delete dir="target/test-classes"/>
+    </target>
+    <target depends="clean" name="cleanall"/>
+    <target depends="build-subprojects,build-project" name="build"/>
+    <target name="build-subprojects"/>
+    <target depends="init" name="build-project">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="target/classes" includeantruntime="false" source="${source}" target="${target}">
+            <src path="src/main/java"/>
+            <src path="src/main/resources"/>
+            <exclude name="**"/>
+            <classpath refid="testng.classpath"/>
+        </javac>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="target/test-classes" includeantruntime="false" source="${source}" target="${target}">
+            <src path="src/test/java"/>
+            <classpath refid="testng.classpath"/>
+        </javac>
+    </target>
+    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
+    <target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
+        <copy todir="${ant.library.dir}">
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </copy>
+        <unzip dest="${ant.library.dir}">
+            <patternset includes="jdtCompilerAdapter.jar"/>
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </unzip>
+    </target>
+    <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
+        <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+        <antcall target="build"/>
+    </target>
+              	
+              	
+              	
+              	<!-- 定义任务，编译src文件夹中的java文件，编译后的class文件放到创建的文件夹下。 -->
+              	              	    <target name="compile" depends="clean">
+              	              	        <javac srcdir="${basedir}/src" destdir="${basedir}/target" includeantruntime="false">
+              	              	            <classpath refid="testng.classpath">
+              	              	            </classpath>
+              	              	        </javac>
+              	              	    </target>
+              	              
+              	              	<!-- 定义默认任务，将class文件集合成jar包。 -->
+              	              	<target name="warFile" depends="compile">
+              	              	        <!-- 删除原有war包。 -->
+              	              	        <delete dir="${basedir}/${warFileName}" />
+              	              	        <!-- 建立新war包。 -->
+              	              	        <war destfile="${basedir}/${warFileName}" webxml="${basedir}/WebContent/WEB-INF/web.xml">
+              	              	            <!-- 将非jar和非class文件拷贝到war包的对应路径下。 -->
+              	              	            <fileset dir="${basedir}/WebContent">
+              	              	                <include name="**/**.*" />
+              	              	                <exclude name="**/*.jar"/>
+              	              	                <exclude name="**/*.class"/>
+              	              	            </fileset>
+              	              	            <!-- 将jar和class文件拷贝到war包的对应路径下。 -->
+              	              	            <lib dir="${basedir}/WebContent/WEB-INF/lib" />
+              	              	            <classes dir="${basedir}/build" />
+              	              	        </war>
+              	              	    </target>     	
+              	
+              	
+              	
+</project>

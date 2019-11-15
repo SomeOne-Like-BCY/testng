@@ -1,0 +1,47 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="mysuite" verbose="1" >
+<test name = "suibianbu" >
+   <!-- <groups>
+      <run>
+           <exclude name = "excludedGroup" /> 排除哪些组
+          <include name = "a1" />包含哪些组
+      </run>
+   </groups> -->
+   <!-- 测试哪个目录 -->
+   <packages>
+      <package name = "com.orimeton"/>  
+   </packages>
+   <!-- 选择一个类中的部分测试脚本 -->
+   <!-- <classes>
+    <class name="whole.path.to.package.className >
+      <methods>
+         <include name = "firstMethod" />
+         <include name = "secondMethod" />
+         <include name = "thirdMethod" />
+      </methods>
+     </class>
+   </classes> -->
+   
+   
+<!--    选择一个包
+<packages>
+    <package name = "packageName" />
+</packages>
+
+选择一个类
+<classes>
+    <class name = "className" />
+</classes>
+
+选择一个方法
+<classes>
+    <class name = "className" />
+       <methods>
+          <include name = "methodName" />
+       </methods>
+    </class>
+</classes> -->
+   
+   
+</test>
+</suite>
